@@ -175,14 +175,13 @@ class StarterVC: UIViewController {
 
 //MARK: THIS IS NOT DRY -- fix it (see end of CameraVC)
 extension StarterVC {
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
         // PROBLEM SOLVED: declared attributes must be set before call of super.init inside constructor
         let img = info[.editedImage] as! UIImage
         let vc = TabVC(nibName: nil, bundle: nil, selfie: img)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 

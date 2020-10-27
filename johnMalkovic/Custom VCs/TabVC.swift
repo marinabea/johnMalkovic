@@ -11,7 +11,7 @@ class TabVC: UITabBarController {
     var selfie: UIImage!
     
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
     
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, selfie: UIImage) {
@@ -32,8 +32,8 @@ class TabVC: UITabBarController {
         let cameraVC = CameraVC()
         cameraVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "camera"), tag: 0)
         
-        let homeVC = HomeVC()
-        homeVC.photo = selfie
+        let homeVC = HomeVC(nibName: nil, bundle: nil, photo: selfie)
+        //homeVC.photo = selfie
         homeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house"), tag: 1)
         
         let photoAlbumVC = PhotoAlbumVC()
