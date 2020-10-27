@@ -61,7 +61,7 @@ class HomeVC: UIViewController {
     }
     
     private func setupCollectionView() {
-        let images = [UIImage(systemName: "heart")!, UIImage(systemName: "star.fill")!.withTintColor(.label), UIImage(systemName: "bolt.fill")!.withTintColor(.label),UIImage(systemName: "heart.fill")!.withTintColor(.label), UIImage(systemName: "star.fill")!.withTintColor(.white), UIImage(systemName: "bolt.fill")!.withTintColor(.label)]
+        let images = [UIImage(systemName: "heart")!, UIImage(systemName: "star.fill")!, UIImage(systemName: "bolt.fill")!,UIImage(systemName: "heart.fill")!, UIImage(systemName: "star.fill")!, UIImage(systemName: "bolt.fill")!, UIImage(systemName: "heart")!, UIImage(systemName: "star.fill")!, UIImage(systemName: "bolt.fill")!,UIImage(systemName: "heart.fill")!, UIImage(systemName: "star.fill")!, UIImage(systemName: "bolt.fill")!]
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 20
@@ -76,8 +76,11 @@ class HomeVC: UIViewController {
     
     @objc
     private func shareImage() {
+        guard photo != nil else { fatalError("photo is nil")}
         // show modal
-        //showDetailViewController(, sender: self)
+        let items = [photo]
+        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+        present(ac, animated: true)
     }
     
 }

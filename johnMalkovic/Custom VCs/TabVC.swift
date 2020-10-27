@@ -41,6 +41,5 @@ class TabVC: UITabBarController {
         
         setViewControllers([cameraVC, homeVC, photoAlbumVC], animated: false)
         selectedIndex = 1
-        tabBar.tintColor = .label
     }
 }
