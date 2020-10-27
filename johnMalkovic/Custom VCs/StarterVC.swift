@@ -185,15 +185,16 @@ class StarterVC: UIViewController {
     }   
 }
 
-extension StarterVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+extension UIViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         
         // PROBLEM: declared attributes must be set before call of super.init inside constructor
         let img = info[.editedImage] as! UIImage
         let vc = TabVC(nibName: nil, bundle: nil, selfie: img)
         
-        navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

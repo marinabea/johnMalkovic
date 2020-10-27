@@ -23,6 +23,7 @@ class PictureCell: UICollectionViewCell {
     func configure(withImage image: UIImage) {
         imageView.image = image.withTintColor(.label)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .label
         addSubview(imageView)
                 
         NSLayoutConstraint.activate([

@@ -36,7 +36,7 @@ class HomeVC: UIViewController {
         view.addSubview(shareButton)
         //MARK: Does that work?
         shareButton.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        shareButton.setBackgroundImage(UIImage(systemName: "square.and.arrow.up")?.withTintColor(.systemBlue), for: .highlighted)
+        shareButton.tintColor = .label
         shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
         
         setupCollectionView()
