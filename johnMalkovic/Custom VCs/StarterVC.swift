@@ -171,8 +171,23 @@ class StarterVC: UIViewController {
     private func openGallery() {
         present(pickImage(from: .photoLibrary), animated: true)
     }
-    
-    private func pickImage(from source: UIImagePickerController.SourceType) -> UIImagePickerController {
+}
+
+//MARK: THIS IS NOT DRY -- fix it (see end of CameraVC)
+extension StarterVC {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        // PROBLEM SOLVED: declared attributes must be set before call of super.init inside constructor
+        let img = info[.editedImage] as! UIImage
+        let vc = TabVC(nibName: nil, bundle: nil, selfie: img)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension StarterVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func pickImage(from source: UIImagePickerController.SourceType) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.sourceType = source
         if UIImagePickerController.isSourceTypeAvailable(picker.sourceType) {
@@ -182,19 +197,6 @@ class StarterVC: UIViewController {
             print("You must test this app on a real device in order to take a picture.")
         }
         return picker
-    }   
-}
-
-extension UIViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    //func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true, completion: nil)
-        
-        // PROBLEM: declared attributes must be set before call of super.init inside constructor
-        let img = info[.editedImage] as! UIImage
-        let vc = TabVC(nibName: nil, bundle: nil, selfie: img)
-        
-        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

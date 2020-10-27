@@ -34,18 +34,29 @@ class HomeVC: UIViewController {
         let shareButton = UIButton()
         shareButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(shareButton)
-        //MARK: Does that work?
         shareButton.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         shareButton.tintColor = .label
         shareButton.addTarget(self, action: #selector(shareImage), for: .touchUpInside)
         
+        let addToAppButton = UIButton()
+        addToAppButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addToAppButton)
+        addToAppButton.setBackgroundImage(UIImage(systemName: "plus.square.fill"), for: .normal)
+        addToAppButton.tintColor = .label
+        addToAppButton.addTarget(self, action: #selector(addImageToApp), for: .touchUpInside)
+        
         setupCollectionView()
         
         NSLayoutConstraint.activate([
-            shareButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            addToAppButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            addToAppButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addToAppButton.heightAnchor.constraint(equalToConstant: 45),
+            addToAppButton.widthAnchor.constraint(equalTo: addToAppButton.heightAnchor),
+            
+            shareButton.topAnchor.constraint(equalTo: addToAppButton.topAnchor),
             shareButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            shareButton.heightAnchor.constraint(equalToConstant: 45),
-            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor),
+            shareButton.heightAnchor.constraint(equalTo: addToAppButton.heightAnchor),
+            shareButton.widthAnchor.constraint(equalTo: addToAppButton.widthAnchor),
             
             photoView.topAnchor.constraint(equalTo: shareButton.bottomAnchor, constant: 25),
             photoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
@@ -77,10 +88,14 @@ class HomeVC: UIViewController {
     @objc
     private func shareImage() {
         guard photo != nil else { fatalError("photo is nil")}
-        // show modal
         let items = [photo]
         let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
         present(ac, animated: true)
+    }
+    
+    @objc
+    private func addImageToApp() {
+        print("add img to app")
     }
     
 }
